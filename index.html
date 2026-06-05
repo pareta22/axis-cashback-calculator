@@ -1,382 +1,357 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8">
+
+  <!-- Important for mobile support -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Axis Cashback CC Cashback Calculator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #97144d, #5f0b31);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+
+    .header {
+      background: #97144d;
+      color: #ffffff;
+      padding: 24px 18px;
+      text-align: center;
+    }
+
+    .tag {
+      background: #ffffff;
+      color: #97144d;
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    .header p {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .content {
+      padding: 22px 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      color: #4a0928;
+      margin-bottom: 8px;
+    }
+
+    .input-box {
+      position: relative;
+    }
+
+    .input-box span {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #97144d;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px 15px 15px 40px;
+      border: 1.5px solid #d9bac8;
+      border-radius: 14px;
+      font-size: 18px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #97144d;
+      box-shadow: 0 0 0 4px rgba(151, 20, 77, 0.12);
+    }
+
+    button {
+      width: 100%;
+      margin-top: 16px;
+      padding: 15px;
+      background: #97144d;
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+      background: #7c103f;
+    }
+
+    .slabs {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .slab {
+      background: #fff4f8;
+      border: 1px solid #efd0dd;
+      padding: 12px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .slab strong {
+      color: #97144d;
+    }
+
+    .result {
+      display: none;
+      margin-top: 20px;
+      background: #fff8fb;
+      border: 1px solid #efd0dd;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed #e1bdcc;
+      font-size: 15px;
+      gap: 10px;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .row strong {
+      color: #4a0928;
+      text-align: right;
+    }
+
+    .total {
+      margin-top: 14px;
+      background: #97144d;
+      color: #ffffff;
+      padding: 15px;
+      border-radius: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .error {
+      display: none;
+      margin-top: 12px;
+      background: #ffe8ee;
+      color: #a00025;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 360px) {
+      .header h1 {
+        font-size: 19px;
+      }
+
+      input,
+      button {
+        font-size: 16px;
+      }
+
+      .content {
+        padding: 18px 14px;
+      }
+    }
   </style>
 </head>
+
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Axis Cashback CC Cashback Calculator&lt;/title&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>* {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, #97144d, #5f0b31);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 430px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.header {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #97144d;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 24px 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.header .tag {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #97144d;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 6px 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.header h2 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 22px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.3;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.header p {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0.95;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.content {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 22px 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>label {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #4a0928;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.input-box {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.input-box span {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>left: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>top: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transform: translateY(-50%);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #97144d;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>input {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 15px 15px 15px 40px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1.5px solid #d9bac8;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>outline: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>input:focus {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-color: #97144d;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 0 0 4px rgba(151, 20, 77, 0.12);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>button {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #97144d;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 17px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>button:active {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transform: scale(0.98);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #7c103f;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.slabs {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: 1fr;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.slab {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #fff4f8;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #efd0dd;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.slab strong {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #97144d;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.result {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #fff8fb;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #efd0dd;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.row {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-bottom: 1px dashed #e1bdcc;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.row:last-child {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-bottom: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.row strong {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #4a0928;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.total {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #97144d;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.error {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #ffe8ee;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #a00025;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.note {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #666;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.5;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>noscript {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #ffe8ee;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #a00025;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 360px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.header h2 {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>font-size: 19px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>input,</p>
-<p class="p1"><span class="Apple-converted-space">      </span>button {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>.content {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>padding: 18px 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="tag"&gt;AXIS BANK&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Axis Cashback CC Cashback Calculator&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Check online spend cashback instantly&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="content"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;noscript&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>JavaScript is blocked in this preview. Please open this file in Chrome or Safari.</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/noscript&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="amount"&gt;Enter Online Spend Amount&lt;/label&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="input-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;₹&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input</p>
-<p class="p1"><span class="Apple-converted-space">          </span>type="tel"</p>
-<p class="p1"><span class="Apple-converted-space">          </span>id="amount"</p>
-<p class="p1"><span class="Apple-converted-space">          </span>placeholder="Example: 67950"</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputmode="numeric"</p>
-<p class="p1"><span class="Apple-converted-space">          </span>autocomplete="off"</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button type="button" onclick="calculateCashback()"&gt;Calculate Cashback&lt;/button&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="error" id="errorBox"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>Please enter a valid amount.</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="slabs"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="slab"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;Up to ₹5,000&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;strong&gt;2%&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="slab"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;₹5,001 to ₹40,000&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;strong&gt;5%&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="slab"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;Above ₹40,000&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;strong&gt;7%&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="result" id="resultBox"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;Spend Amount&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;strong id="spendAmount"&gt;₹0&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;2% Slab Cashback&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;strong id="slab1"&gt;₹0&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;5% Slab Cashback&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;strong id="slab2"&gt;₹0&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;7% Slab Cashback&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;strong id="slab3"&gt;₹0&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="total"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;Total&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span id="totalCashback"&gt;₹0&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="note"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>Note: Cashback may be capped as per Axis Bank statement cycle rules.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>Final value may depend on bank exclusions and rounding.</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function formatAmount(value) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return "₹" + Math.round(value).toLocaleString("en-IN");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function calculateCashback() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>var inputValue = document.getElementById("amount").value;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>var amount = Number(inputValue.replace(/,/g, "").trim());</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>var errorBox = document.getElementById("errorBox");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>var resultBox = document.getElementById("resultBox");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!amount || amount &lt;= 0) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>errorBox.style.display = "block";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>resultBox.style.display = "none";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>errorBox.style.display = "none";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>var slab1 = 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>var slab2 = 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>var slab3 = 0;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (amount &lt;= 5000) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>slab1 = amount * 0.02;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else if (amount &lt;= 40000) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>slab1 = 5000 * 0.02;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>slab2 = (amount - 5000) * 0.05;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>slab1 = 5000 * 0.02;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>slab2 = 35000 * 0.05;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>slab3 = (amount - 40000) * 0.07;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>var total = slab1 + slab2 + slab3;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (total &gt; 4000) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>total = 4000;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("spendAmount").innerText = formatAmount(amount);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("slab1").innerText = formatAmount(slab1);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("slab2").innerText = formatAmount(slab2);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("slab3").innerText = formatAmount(slab3);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("totalCashback").innerText = formatAmount(total);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>resultBox.style.display = "block";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("amount").addEventListener("keyup", function(event) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (event.key === "Enter") {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>calculateCashback();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+  <div class="card">
+    <div class="header">
+      <div class="tag">AXIS BANK</div>
+      <h1>Axis Cashback CC Cashback Calculator</h1>
+      <p>Check online spend cashback instantly</p>
+    </div>
+
+    <div class="content">
+
+      <label for="amount">Enter Online Spend Amount</label>
+
+      <div class="input-box">
+        <span>₹</span>
+        <input
+          type="tel"
+          id="amount"
+          placeholder="Example: 67950"
+          inputmode="numeric"
+          autocomplete="off"
+        >
+      </div>
+
+      <button type="button" onclick="calculateCashback()">Calculate Cashback</button>
+
+      <div class="error" id="errorBox">
+        Please enter a valid amount.
+      </div>
+
+      <div class="slabs">
+        <div class="slab">
+          <span>Up to ₹5,000</span>
+          <strong>2%</strong>
+        </div>
+
+        <div class="slab">
+          <span>₹5,001 to ₹40,000</span>
+          <strong>5%</strong>
+        </div>
+
+        <div class="slab">
+          <span>Above ₹40,000</span>
+          <strong>7%</strong>
+        </div>
+      </div>
+
+      <div class="result" id="resultBox">
+        <div class="row">
+          <span>Spend Amount</span>
+          <strong id="spendAmount">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>2% Slab Cashback</span>
+          <strong id="slab1">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>5% Slab Cashback</span>
+          <strong id="slab2">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>7% Slab Cashback</span>
+          <strong id="slab3">₹0</strong>
+        </div>
+
+        <div class="total">
+          <span>Total Cashback</span>
+          <span id="totalCashback">₹0</span>
+        </div>
+      </div>
+
+      <p class="note">
+        Note: Cashback may be capped as per Axis Bank statement cycle rules.
+        Final value may depend on bank exclusions and rounding.
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    function formatAmount(value) {
+      return "₹" + Math.round(value).toLocaleString("en-IN");
+    }
+
+    function calculateCashback() {
+      var inputValue = document.getElementById("amount").value;
+      var amount = Number(inputValue.replace(/,/g, "").trim());
+
+      var errorBox = document.getElementById("errorBox");
+      var resultBox = document.getElementById("resultBox");
+
+      if (!amount || amount <= 0) {
+        errorBox.style.display = "block";
+        resultBox.style.display = "none";
+        return;
+      }
+
+      errorBox.style.display = "none";
+
+      var slab1 = 0;
+      var slab2 = 0;
+      var slab3 = 0;
+
+      if (amount <= 5000) {
+        slab1 = amount * 0.02;
+      } else if (amount <= 40000) {
+        slab1 = 5000 * 0.02;
+        slab2 = (amount - 5000) * 0.05;
+      } else {
+        slab1 = 5000 * 0.02;
+        slab2 = 35000 * 0.05;
+        slab3 = (amount - 40000) * 0.07;
+      }
+
+      var total = slab1 + slab2 + slab3;
+
+      if (total > 4000) {
+        total = 4000;
+      }
+
+      document.getElementById("spendAmount").innerText = formatAmount(amount);
+      document.getElementById("slab1").innerText = formatAmount(slab1);
+      document.getElementById("slab2").innerText = formatAmount(slab2);
+      document.getElementById("slab3").innerText = formatAmount(slab3);
+      document.getElementById("totalCashback").innerText = formatAmount(total);
+
+      resultBox.style.display = "block";
+    }
+
+    document.getElementById("amount").addEventListener("keyup", function(event) {
+      if (event.key === "Enter") {
+        calculateCashback();
+      }
+    });
+  </script>
+
 </body>
 </html>
